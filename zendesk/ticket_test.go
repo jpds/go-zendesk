@@ -118,6 +118,19 @@ func TestBulkUpdateManyTickets(t *testing.T) {
 	require.NoError(t, err)
 }
 
+func TestListTickets(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode.")
+	}
+
+	client, err := NewEnvClient()
+	require.NoError(t, err)
+
+	listed, err := client.ListTickets()
+	require.NoError(t, err)
+	require.Len(t, listed, 5)
+}
+
 func TestListTicketIncidents(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode.")

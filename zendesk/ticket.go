@@ -97,6 +97,12 @@ func (c *client) ListRequestedTickets(userID int64) ([]Ticket, error) {
 	return out.Tickets, err
 }
 
+func (c *client) ListTickets() ([]Ticket, error) {
+	out := new(APIPayload)
+	err := c.get("/api/v2/tickets.json", out)
+	return out.Tickets, err
+}
+
 // ListTicketIncidents list all incidents related to the problem
 func (c *client) ListTicketIncidents(problemID int64) ([]Ticket, error) {
 	out := new(APIPayload)
