@@ -35,6 +35,11 @@ func TestTicketCRUD(t *testing.T) {
 	require.Equal(t, created.RequesterID, found.RequesterID)
 	require.Equal(t, created.Tags, found.Tags)
 
+	searched, err := client.SearchTickets("evacuation")
+	require.NoError(t, err)
+	require.Len(t, searched, 1)
+	require.Equal(t, created, &searched[0])
+
 	input := Ticket{
 		Status: String("solved"),
 	}

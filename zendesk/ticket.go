@@ -121,3 +121,9 @@ func (c *client) PermanentlyDeleteTicket(id int64) (*JobStatus, error) {
 	err := c.delete(fmt.Sprintf("/api/v2/deleted_tickets/%d.json", id), out)
 	return out.JobStatus, err
 }
+
+func (c *client) SearchTickets(query string) ([]Ticket, error) {
+	out := new(APIPayload)
+	err := c.get("/api/v2/tickets/search.json?query="+query, out)
+	return out.Tickets, err
+}
